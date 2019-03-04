@@ -12,14 +12,14 @@ using namespace std;
 	}
 	void ship::InData(ifstream & ifst)
 	{
-		int type;
+		int typ;
 		ifst >> water_displacement;
-		ifst >> type;
-		if (type == 1)
+		ifst >> typ;
+		if (typ == 1)
 			type = LINER;
-		else if (type == 2)
+		else if (typ == 2)
 			type = TANKER;
-		else if (type == 3)
+		else if (typ == 3)
 			type = TUG;
 	}
 	void plane::Out(ofstream &ofst) {
@@ -36,11 +36,13 @@ using namespace std;
 	{
 		ofst << "It is Ship: водоизмещение = " << water_displacement;
 		if (type == LINER)
-			ofst << ", тип судна = " << LINER;
+			ofst << ", тип судна = LINER";
 		else if (type == TANKER)
-			ofst << ", тип судна = " << TANKER;
+			ofst << ", тип судна = TANKER";
 		else if (type == TUG)
-			ofst << ", тип судна = " << TUG;
+			ofst << ", тип судна = TUG";
+		OutCommon(ofst);
+
 	}
 	transport* transport::In(ifstream &ifst)
 	{

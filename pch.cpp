@@ -144,6 +144,7 @@ using namespace std;
 			current = current->Next;
 		}
 	}
+
 	float transport::Travel_time()
 	{
 		float time;
@@ -214,6 +215,24 @@ using namespace std;
 		this->Prev->Next = this;*/
 	}
 
+	void transport::Out_only_plane(ofstream & ofst)
+	{
+		ofst << endl;
+	}
+	void plane::Out_only_plane(ofstream &ofst)
+	{
+		Out(ofst);
+	}
+	void container::Out_only_plane(ofstream & ofst)
+	{
+		ofst << "Only planes" << endl;
+		Node* current = Top;
+		for (int i = 0; i < count; i++) {
+			ofst << i << ": ";
+			current->data->Out_only_plane(ofst);
+			current = current->Next;
+		}
+	}
 
 // В целом этот файл можно пропустить, но не удаляйте его, если вы используете предкомпилированные заголовки.
 	

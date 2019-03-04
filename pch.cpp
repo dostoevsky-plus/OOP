@@ -10,6 +10,18 @@ using namespace std;
 	void traine::InData(ifstream &ifst) {
 		ifst >> count ;
 	}
+	void ship::InData(ifstream & ifst)
+	{
+		int typ;
+		ifst >> water_displacement;
+		ifst >> typ;
+		if (typ == 1)
+			type = LINER;
+		else if (typ == 2)
+			type = TANKER;
+		else if (typ == 3)
+			type = TUG;
+	}
 	void plane::Out(ofstream &ofst) {
 		ofst << "It is Plane: грузоподъемность = " << c
 			<< ", дальность полета = " << range;
@@ -19,6 +31,18 @@ using namespace std;
 	void traine::Out(ofstream &ofst) {
 		ofst << "It is Traine: count = " << count ;
 		OutCommon(ofst);
+	}
+	void ship::Out(ofstream & ofst)
+	{
+		ofst << "It is Ship: водоизмещение = " << water_displacement;
+		if (type == LINER)
+			ofst << ", тип судна = LINER";
+		else if (type == TANKER)
+			ofst << ", тип судна = TANKER";
+		else if (type == TUG)
+			ofst << ", тип судна = TUG";
+		OutCommon(ofst);
+
 	}
 	transport* transport::In(ifstream &ifst)
 	{
@@ -32,7 +56,9 @@ using namespace std;
 		{
 			s = new traine;
 		}
-		else
+		else if (key == 3) {
+			s = new ship;
+		} else
 		return 0;
 		s->InData(ifst);
 		ifst >> s->distance >> s->spead;

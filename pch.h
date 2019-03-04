@@ -19,6 +19,7 @@ public:
 	static transport* In(ifstream &ifst);
 	virtual void InData(ifstream &ifst) = 0; // ввод
 	virtual void Out(ofstream &ofst) = 0; // вывод
+	virtual void Out_only_plane(ofstream &ofst);
 	void OutCommon(ofstream &ofst);
 };
 class container
@@ -34,6 +35,7 @@ private:
 	Node* Top;
 	int count;
 public:
+	void Out_only_plane(ofstream &ofst);
 	void In(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	void Clear(); // очистка контейнера от фигур
@@ -49,6 +51,7 @@ class plane : public transport {
 public:
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
+	void Out_only_plane(ofstream &ofst);
 	plane() {} // создание без инициализации.
 };
 class traine : public transport {

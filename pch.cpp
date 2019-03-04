@@ -113,8 +113,16 @@ using namespace std;
 		for (int j = 0; j < count; j++) {
 			ofst << j << ": ";
 			current->data->Out(ofst);
+			ofst << "идеальное время пути = " <<
+			current->data->Travel_time() << endl;
 			current = current->Next;
 		}
+	}
+	float transport::Travel_time()
+	{
+		float time;
+		time = static_cast<float>(this->distance) / static_cast<float>(this->spead);
+		return time;
 	}
 
 // В целом этот файл можно пропустить, но не удаляйте его, если вы используете предкомпилированные заголовки.

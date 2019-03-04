@@ -135,8 +135,7 @@ using namespace std;
 		Node* currentnext = current->Next;
 		for (int i = 1; i < count; i++) {
 			for (int j = 1; j < count; j++) {
-				if (current->data->Compare(*currentnext->data)) {
-					if (current->data->Travel_time < current->Next->data->Travel_time)
+				if (current->data->Compare(*current->Next->data)) {
 						//std::cin >> "D";
 					current->Processsort(Top);
 					current = current->Next;
@@ -159,7 +158,7 @@ using namespace std;
 			else
 			{
 				this->castl();
-				Top = this;
+				//Top = this->Prev;
 			}
 		}
 		else

@@ -45,7 +45,7 @@ public:
 class plane : public transport {
 	int range;
 	int c;
-
+	int cargo;
 public:
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод

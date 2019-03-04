@@ -5,14 +5,14 @@
 #include <fstream>
 using namespace std;
 	void plane::InData(ifstream &ifst) {
-		ifst >> c  >> range ;
+		ifst >> c  >> range >> cargo;
 	}
 	void traine::InData(ifstream &ifst) {
 		ifst >> count ;
 	}
 	void plane::Out(ofstream &ofst) {
 		ofst << "It is Plane: грузоподъемность = " << c
-			<< ", дальность полета = " << range;
+			<< ", дальность полета = " << range << ", груз в данный момент = " << cargo;
 		OutCommon(ofst);
 
 	}

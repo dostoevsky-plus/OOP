@@ -16,6 +16,14 @@ private:
 	int spead;
 	int distance;
 public:
+	//для тестов
+	int get_distance();
+	int get_spead();
+	void set_distance(int distance);
+	void set_spead(int spead);
+
+	virtual string getall() = 0;
+
 	static transport* In(ifstream &ifst);
 	virtual void InData(ifstream &ifst) = 0; // ввод
 	virtual void Out(ofstream &ofst) = 0; // вывод
@@ -33,12 +41,17 @@ private:
 		Node* Next;
 		Node* Prev;
 		transport* data;
-		void Processsort(Node* &Top);//меняет местами 2 элемента и изменяет верхушку списка
-		void castl();
+		//void Processsort(Node* &Top);//вызывает функцию castl и изменяет верхушку списка
+		void castl();//меняет местами 2 элемента 
 	};
 	Node* Top;
 	int count;
 public:
+	Node* get_Top()
+	{
+		return this->Top;
+	};
+	int get_count();
 	void Out_only_plane(ofstream &ofst);
 	void In(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
@@ -47,13 +60,13 @@ public:
 	void Sort();
 	~container() { Clear(); }
 };
-
-
 class plane : public transport {
 	int range;
 	int c;
 	int cargo;
 public:
+	string getall();
+
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	void Out_only_plane(ofstream &ofst);
@@ -63,20 +76,20 @@ class traine : public transport {
 	int count;
 
 public:
+	string getall();
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	traine() {} // создание без инициализации.
 };
-
-// TODO: add headers that you want to pre-compile here
-
-#endif //PCH_H
 enum type_of_ship { LINER, TUG, TANKER };
 struct ship : public transport {
 	int water_displacement;
 	type_of_ship type;
-	public:
+public:
+	string getall();
 	void InData(ifstream &ifst);
 	void Out(ofstream &ofst);
 	ship() {}
 };
+// TODO: add headers that you want to pre-compile here
+#endif //PCH_H

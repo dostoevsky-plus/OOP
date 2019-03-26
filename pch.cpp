@@ -3,6 +3,7 @@
 #include "pch.h"
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 	void plane::InData(ifstream &ifst) {
 		ifst >> c  >> range >> cargo;
@@ -26,11 +27,15 @@ using namespace std;
 		ofst << "It is Plane: грузоподъемность = " << c
 			<< ", дальность полета = " << range << ", груз в данный момент = " << cargo;
 		OutCommon(ofst);
+		ofst << "идеальное время пути = " <<
+			this->Travel_time() << endl;
 
 	}
 	void traine::Out(ofstream &ofst) {
 		ofst << "It is Traine: count = " << count ;
 		OutCommon(ofst);
+		ofst << "идеальное время пути = " <<
+			this->Travel_time() << endl;
 	}
 	void ship::Out(ofstream & ofst)
 	{
@@ -42,6 +47,8 @@ using namespace std;
 		else if (type == TUG)
 			ofst << ", тип судна = TUG";
 		OutCommon(ofst);
+		ofst << "идеальное время пути = " <<
+			this->Travel_time() << endl;
 
 	}
 	transport* transport::In(ifstream &ifst)
@@ -139,8 +146,7 @@ using namespace std;
 		for (int j = 0; j < count; j++) {
 			ofst << j << ": ";
 			current->data->Out(ofst);
-			ofst << "идеальное время пути = " <<
-			current->data->Travel_time() << endl;
+			
 			current = current->Next;
 		}
 	}
@@ -163,8 +169,7 @@ using namespace std;
 		for (int i = 1; i < count; i++) {
 			for (int j = 1; j < count; j++) {
 				if (current->data->Compare(*current->Next->data)) {
-						//std::cin >> "D";
-					current->Processsort(Top);
+					current->castl();
 					current = current->Next;
 				}
 				else
@@ -173,9 +178,9 @@ using namespace std;
 			current = Top;
 		}
 	}
-	void container::Node::Processsort(Node *& Top)
+	/*void container::Node::Processsort(Node *& Top)
 	{
-		Node* currentnext = this->Next;
+	0000	Node* currentnext = this->Next;
 		if (this == Top)//определяем указывает ли на голову
 		{
 			if (this->Next->Next == this)
@@ -197,7 +202,7 @@ using namespace std;
 			else
 				this->castl();
 		}
-	}
+	}*/
 	void container::Node::castl()
 	{
 		Node* currentnext = this->Next;
@@ -232,6 +237,40 @@ using namespace std;
 			current->data->Out_only_plane(ofst);
 			current = current->Next;
 		}
+	}
+	//дальше функции для тестов
+	int transport::get_distance()
+	{
+		return this->distance;
+	}
+	int transport::get_spead()
+	{
+		return this->spead;
+	}
+	string plane::getall()
+	{
+		return to_string(this->c) + to_string(this->range) + to_string(this->cargo);
+	}
+	string traine::getall()
+	{
+		return to_string(this->count);
+	}
+	string ship::getall()
+	{
+		return to_string(this->water_displacement) + to_string(this->type);
+	}
+	void transport::set_distance(int distance)
+	{
+		this->distance = distance;
+	}
+	void transport::set_spead(int spead)
+	{
+		this->spead = spead;
+	}
+	
+	int container::get_count()
+	{
+		return this->count;
 	}
 
 // В целом этот файл можно пропустить, но не удаляйте его, если вы используете предкомпилированные заголовки.

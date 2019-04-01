@@ -21,7 +21,7 @@ public:
 	int get_spead();
 	void set_distance(int distance);
 	void set_spead(int spead);
-
+	static int from_file_to_int(ifstream &ifst);
 	virtual string getall() = 0;
 
 	static transport* In(ifstream &ifst);

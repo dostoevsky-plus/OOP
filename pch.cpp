@@ -6,23 +6,35 @@
 #include <string>
 using namespace std;
 	void plane::InData(ifstream &ifst) {
-		ifst >> c  >> range >> cargo;
+		this->c=this->from_file_to_int(ifst);
+		this->range = this->from_file_to_int(ifst);
+		this->cargo = this->from_file_to_int(ifst);
+		//ifst >> c  >> range >> cargo;
 	}
 	void traine::InData(ifstream &ifst) {
-		ifst >> count ;
+		this->count = this->from_file_to_int(ifst);
+		//ifst >> count ;
 	}
 	void ship::InData(ifstream & ifst)
 	{
 		int typ;
-		ifst >> water_displacement;
-		ifst >> typ;
+		this->water_displacement = this->from_file_to_int(ifst);
+		//ifst >> water_displacement;
+		//ifst >> typ;
+		typ = this->from_file_to_int(ifst);
 		if (typ == 1)
 			type = LINER;
 		else if (typ == 2)
 			type = TANKER;
 		else if (typ == 3)
 			type = TUG;
+		else
+		{
+			cout << "ERROR IN FAILIN.TXT";
+			exit(0);
+		}
 	}
+
 	void plane::Out(ofstream &ofst) {
 		ofst << "It is Plane: грузоподъемность = " << c
 			<< ", дальность полета = " << range << ", груз в данный момент = " << cargo;
@@ -55,7 +67,9 @@ using namespace std;
 	{
 		transport *s;
 		int key;
-		ifst >> key;
+		key = transport::from_file_to_int(ifst);
+		//key = s->from_file_to_int(ifst);
+		//ifst >> key;
 		if (key == 1) {
 			s = new plane;
 		}
@@ -65,10 +79,16 @@ using namespace std;
 		}
 		else if (key == 3) {
 			s = new ship;
-		} else
-		return 0;
+		}
+		else
+		{
+			cout << "ERROR IN FAILIN.TXT";
+			exit(0);
+		};
 		s->InData(ifst);
-		ifst >> s->distance >> s->spead;
+		s->distance = transport::from_file_to_int(ifst);
+		s->spead = transport::from_file_to_int(ifst);
+		//ifst >> s->distance >> s->spead;
 		return s;
 	}
 	void transport::OutCommon(ofstream & ofst)
@@ -178,31 +198,6 @@ using namespace std;
 			current = Top;
 		}
 	}
-	/*void container::Node::Processsort(Node *& Top)
-	{
-	0000	Node* currentnext = this->Next;
-		if (this == Top)//определяем указывает ли на голову
-		{
-			if (this->Next->Next == this)
-			{
-				Top = this->Next;
-			}
-			else
-			{
-				this->castl();
-				//Top = this->Prev;
-			}
-		}
-		else
-		{
-			if (this->Next->Next == this)
-			{
-				Top = this->Next;
-			}
-			else
-				this->castl();
-		}
-	}*/
 	void container::Node::castl()
 	{
 		Node* currentnext = this->Next;
@@ -211,13 +206,6 @@ using namespace std;
 		transport* q2 = currentnext->data;
 		this->data = q2;
 		currentnext->data = q1;
-		/*currentnext->Next = this->Next;
-		this->Next = currentnext;
-		this->Prev = currentnext->Prev;
-		currentnext->Prev = this;
-		currentnext = this->Next;
-		currentnext->Next->Prev = currentnext;
-		this->Prev->Next = this;*/
 	}
 
 	void transport::Out_only_plane(ofstream & ofst)
@@ -267,6 +255,38 @@ using namespace std;
 	{
 		this->spead = spead;
 	}
+
+	int transport::from_file_to_int(ifstream & ifst)
+	{
+
+			string str;
+			bool flag = true;
+			ifst >> str;
+			if (str == "")
+			{
+				flag = false;
+			}
+			else
+			{
+
+				for (int i = 0; i < str.length(); i++)
+				{
+					if (isdigit(str[i]))
+					{
+					}
+					else
+						flag = false;
+
+				}
+			}
+			if (flag == false)
+			{
+				cout << "ERROR IN FAILIN.TXT";
+				exit(0);
+			}
+			else
+			return stoi(str);
+		}
 	
 	int container::get_count()
 	{

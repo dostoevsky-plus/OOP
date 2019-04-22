@@ -20,6 +20,10 @@ public:
 	virtual void InData(ifstream &ifst) = 0; // ввод
 	virtual void Out(ofstream &ofst) = 0; // вывод
 	void OutCommon(ofstream &ofst);
+	//мультиметоды
+	virtual void MultiMethod(transport *other, ofstream &ofst) = 0;
+	virtual void MMplane(ofstream &ofst) = 0;
+	virtual void MMtraine(ofstream &ofst) = 0;
 };
 class container
 {
@@ -37,6 +41,7 @@ public:
 	void In(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	void Clear(); // очистка контейнера от фигур
+	void MultiMethod(ofstream &ofst);
 	container(); // инициализация контейнера
 	~container() { Clear(); }
 };
@@ -50,6 +55,10 @@ public:
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	plane() {} // создание без инициализации.
+	//мультиметоды
+	void MultiMethod(transport *other, ofstream &ofst);
+	void MMplane(ofstream &ofst);
+	void MMtraine(ofstream &ofst);
 };
 class traine : public transport {
 	int count;
@@ -58,6 +67,10 @@ public:
 	void InData(ifstream &ifst); // ввод
 	void Out(ofstream &ofst); // вывод
 	traine() {} // создание без инициализации.
+	//мультиметоды
+	void MultiMethod(transport *other, ofstream &ofst);
+	void MMplane(ofstream &ofst);
+	void MMtraine(ofstream &ofst);
 };
 
 // TODO: add headers that you want to pre-compile here

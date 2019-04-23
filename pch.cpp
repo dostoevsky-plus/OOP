@@ -99,6 +99,7 @@ using namespace std;
 				current_i->data->MultiMethod(current_j->data, ofst);
 				current_i->data->Out(ofst);
 				current_j->data->Out(ofst);
+				current_j = current_j->Next;
 			}
 			current_i = current_i->Next;
 		}
